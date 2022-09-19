@@ -55,7 +55,7 @@ ROOT_URLCONF = 'muebles.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [f'{BASE_DIR}/muebles/template',f'{BASE_DIR}/productos/template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
