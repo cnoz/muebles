@@ -7,3 +7,8 @@ from productos.models import *
 
 def inicio(request):
     return render(request, 'index.html')
+
+
+def mesas(request):
+    return render(request, 'mesas.html')
+

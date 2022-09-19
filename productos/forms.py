@@ -19,7 +19,7 @@ class form_sillones(forms.Form):
     tipo = forms.CharField(max_length= 30)
     precio = forms.IntegerField()
 
-class form_usuario(forms.Forml):
+class form_usuario(forms.Form):
     nombre = forms.CharField(max_length= 30)
     apellido= forms.CharField(max_length= 30)
     email = forms.EmailField()

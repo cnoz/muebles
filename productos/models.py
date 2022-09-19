@@ -3,21 +3,21 @@ from django.db import models
 # Create your models here.
 
 
-class mesas(models.Model):
+class mesa(models.Model):
     nombre = models.CharField(max_length= 30)
     material = models.CharField(max_length= 30)
     tipo= models.CharField(max_length= 30)
     precio = models.IntegerField()
 
 
-class sillas(models.Model):
+class silla(models.Model):
     nombre = models.CharField(max_length= 30)
     material = models.CharField(max_length= 30)
     tipo = models.CharField(max_length= 30)
     precio = models.IntegerField()
 
 
-class sillones(models.Model):
+class sofa(models.Model):
     nombre = models.CharField(max_length= 30)
     material = models.CharField(max_length= 30)
     tipo = models.CharField(max_length= 30)
