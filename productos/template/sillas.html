@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesas</title>
+</head>
+<body>
+    
+<h2>Bienvenido a la pagina de sillas</h2>
+
+<div class="contenidoSillas">
+    <form class="formDataSillas" action="/productos/sillas/" method="POST"> {% csrf_token %}
+        <input type="text" name="nombre" placeholder="nombre">
+        <input type="text" name="material" placeholder="material">
+        <input type="text" name="tipo" placeholder="tipo">
+        <input type="number" name="precio" placeholder="precio">
+        <button type="submit" class="btn btn-primary btndj">Registrar</button>
+    </form>
+</div>
+<div>
+    <form class="formDataSillas" action="/productos/buscar_sillas/" method="GET"> 
+        <input type="text" name="nombre" placeholder="nombre">
+        <button type="submit" class="btn btn-primary btndj">Buscar</button>
+    </form>
+</div>
+
+
+
+
+<div>
+    {% if sillas %}
+    <ul>
+        {% for silla in sillas %}
+        <li>{{ silla.nombre}}</li>
+        <li>{{ silla.material}}</li>
+        <li>{{ silla.tipo}}</li>
+        <li>{{ silla.precio}}</li>
+
+        {% endfor %}
+    </ul>
+
+
+    {% else %} 
+    <p><h5>No hay datos</h5></p>
+
+    {% endif %}
+
+</body>
+</html>

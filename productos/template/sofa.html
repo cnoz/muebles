@@ -8,19 +8,19 @@
 </head>
 <body>
     
-<h2>Bienvenido a la pagina de los usuarios</h2>
+<h2>Bienvenido a la pagina de los sofa</h2>
 
-<div class="contenidoUsuarios">
-    <form class="formDataUsuarios" action="/productos/usuario/" method="POST"> {% csrf_token %}
+<div class="contenidoSofa">
+    <form class="formDataSofa" action="/productos/sofa/" method="POST"> {% csrf_token %}
         <input type="text" name="nombre" placeholder="nombre">
-        <input type="text" name="apellido" placeholder="apellido">
-        <input type="email" name="email" placeholder="email">
-        <input type="number" name="telefono" placeholder="telefono">
+        <input type="text" name="material" placeholder="material">
+        <input type="text" name="tipo" placeholder="tipo">
+        <input type="number" name="precio" placeholder="precio">
         <button type="submit" class="btn btn-primary btndj">Registrar</button>
     </form>
 </div>
 <div>
-    <form class="formDataUsuarios" action="/productos/buscar_usuario/" method="GET"> 
+    <form class="formDataSofa" action="/productos/buscar_sofa/" method="GET"> 
         <input type="text" name="nombre" placeholder="nombre">
         <button type="submit" class="btn btn-primary btndj">Buscar</button>
     </form>
@@ -30,13 +30,13 @@
 
 
 <div>
-    {% if usuario %}
+    {% if sofas %}
     <ul>
-        {% for user in usuario %}
-        <li>{{ user.nombre}}</li>
-        <li>{{ user.apellido}}</li>
-        <li>{{ user.email}}</li>
-        <li>{{ user.telefono}}</li>
+        {% for sofa in sofas %}
+        <li>{{ sofa.nombre}}</li>
+        <li>{{ sofa.material}}</li>
+        <li>{{ sofa.tipo}}</li>
+        <li>{{ sofa.precio}}</li>
 
         {% endfor %}
     </ul>
