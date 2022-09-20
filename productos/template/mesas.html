@@ -10,5 +10,42 @@
     
 <h2>Bienvenido a la pagina de mesas</h2>
 
+<div class="contenidoMesas">
+    <form class="formDataMesas" action="/productos/mesas/" method="POST"> {% csrf_token %}
+        <input type="text" name="nombre" placeholder="nombre">
+        <input type="text" name="material" placeholder="material">
+        <input type="text" name="tipo" placeholder="tipo">
+        <input type="number" name="precio" placeholder="precio">
+        <button type="submit" class="btn btn-primary btndj">Registrar</button>
+    </form>
+</div>
+<div>
+    <form class="formDataMesas" action="/productos/buscar_mesas/" method="GET"> 
+        <input type="text" name="nombre" placeholder="nombre">
+        <button type="submit" class="btn btn-primary btndj">Buscar</button>
+    </form>
+</div>
+
+
+
+
+<div>
+    {% if mesas %}
+    <ul>
+        {% for mesa in mesas %}
+        <li>{{ mesa.nombre}}</li>
+        <li>{{ mesa.material}}</li>
+        <li>{{ mesa.tipo}}</li>
+        <li>{{ mesa.precio}}</li>
+
+        {% endfor %}
+    </ul>
+
+
+    {% else %} 
+    <p><h5>No hay datos</h5></p>
+
+    {% endif %}
+
 </body>
 </html>
