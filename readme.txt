@@ -14,6 +14,6 @@ Cada uno de los formualarios se encuentra en la barra de navegacion
 
 Se pueden cargar todos los productos, y consultar mediante cada formulario.
 
-Existe a su vez una carga de usuarios, los cuales tambien pueden ser consultados mediante los formualrios.
+Existe a su vez una carga de usuarios, los cuales tambien pueden ser consultados mediante los formularios.
 
 
