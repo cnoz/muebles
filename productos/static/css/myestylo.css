@@ -13,3 +13,29 @@
     padding: 50px;
 
 }
+.contenidoSillas{
+    background-color: #544803;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+
+}
+.contenidoSofa{
+    background-color: #544803;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+
+}
+
+
+.contenidoUsuarios{
+    background-color: #544803;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+
+}
