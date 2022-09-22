@@ -1,8 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
-
 class Mesa(models.Model):
     nombre = models.CharField(max_length= 30)
     material = models.CharField(max_length= 30)
