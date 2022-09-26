@@ -15,5 +15,11 @@ urlpatterns = [
         path('api_sofa/', api_sofa),
         path('usuario/', usuario),
         path('buscar_usuario/',buscar_usuario),
-        path('api_usuario/', api_usuario)
+        path('api_usuario/', api_usuario),
+        path('read_mesas/', read_mesas),
+        path('create_mesas/', create_mesas),
+        path('update_mesas/<mesa_id>', update_mesas),
+        path('delete_mesas/<mesa_id>', delete_mesas),
+      
+        
 ]
