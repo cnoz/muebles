@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from productos.forms import form_mesas, form_sillas, form_sillones, form_usuario
+from productos.forms import form_mesas, form_sillas, form_sillones, form_usuario, UserRegisterForm
 from productos.models import *
 
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -10,6 +13,7 @@ def inicio(request):
     return render(request, 'index.html')
 
 ##################### mesas         ###################################
+@login_required
 def mesas(request):
     if request.method == "POST":
         mesa = Mesa(nombre=request.POST['nombre'], material=request.POST['material'],tipo=request.POST['tipo'],precio=request.POST['precio'])
@@ -47,6 +51,7 @@ def api_mesas(request):
     return render(request, 'api_mesas.html', {'formulario': formulario})
 
 ####################  sillas        #####################################
+
 def sillas(request):
     if request.method == "POST":
         sl = Silla(nombre=request.POST['nombre'], material=request.POST['material'],tipo=request.POST['tipo'],precio=request.POST['precio'])
@@ -200,3 +205,42 @@ def delete_mesas(request, mesa_id):
     return render(request, "crud_productos/read_mesas.html", {"mesas": mesas})
 
 ##  LOGIN ###
+
+def login_request(request):    
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data= request.POST)    
+        if form.is_valid():
+            user = form.cleaned_data.get('username')
+            pwd = form.cleaned_data.get('password')
+
+            user = authenticate(username = user , password = pwd)
+
+            if user is not None:
+                login(request, user )
+                return  render(request, 'index.html')
+            
+            else:
+                return render(request, 'productos/login.html', {'form':form})
+                #return render(request,'login.html',{'form': form })
+
+        else:
+            return render(request, 'productos/login.html', {'form': form})
+
+    form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+def registro(request):
+    if request.method == 'POST':
+        #form = UserCreationForm(request.POST)
+        form2 = UserRegisterForm(request.POST)
+        print(form2)
+        if form2.is_valid():
+            #username = form.cleaned_data["username"]
+            form2.save()
+            #redirect("/muebles/login/")
+            #return render(request, "home.html")
+            return redirect("/productos/login/")
+
+    #form = UserCreationForm()
+    form2 = UserRegisterForm()
+    return render(request, "registro.html", {'form1': form2})
