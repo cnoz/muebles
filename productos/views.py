@@ -204,7 +204,7 @@ def delete_mesas(request, mesa_id):
     mesas = Mesa.objects.all() #Trae todo
     return render(request, "crud_productos/read_mesas.html", {"mesas": mesas})
 
-##  LOGIN ###
+##  LOGIN #########################################################################################################
 
 def login_request(request):    
     if request.method == 'POST':
@@ -220,27 +220,31 @@ def login_request(request):
                 return  render(request, 'index.html')
             
             else:
-                return render(request, 'productos/login.html', {'form':form})
+                return render(request, 'login.html', {'form':form})
                 #return render(request,'login.html',{'form': form })
 
         else:
-            return render(request, 'productos/login.html', {'form': form})
+            return render(request, 'login.html', {'form': form})
 
     form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
 def registro(request):
+
+    form = UserRegisterForm(request.POST)
     if request.method == 'POST':
         #form = UserCreationForm(request.POST)
-        form2 = UserRegisterForm(request.POST)
-        print(form2)
-        if form2.is_valid():
+        #form2 = UserRegisterForm(request.POST)
+        print(form)
+        if form.is_valid():
             #username = form.cleaned_data["username"]
-            form2.save()
+            form.save()
             #redirect("/muebles/login/")
             #return render(request, "home.html")
             return redirect("/productos/login/")
+        else:
+            return render (request, "registro.html", {'form':form})
 
     #form = UserCreationForm()
-    form2 = UserRegisterForm()
-    return render(request, "registro.html", {'form1': form2})
+    form = UserRegisterForm()
+    return render(request, "registro.html", {'form': form})
