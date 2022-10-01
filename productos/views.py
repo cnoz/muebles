@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from productos.forms import form_mesas, form_sillas, form_sillones, form_usuario, UserRegisterForm, UserEditForm, ChangePasswordForm
+from productos.forms import form_mesas, form_sillas, form_sofas, form_usuarios, UserRegisterForm, UserEditForm, ChangePasswordForm
 from productos.models import *
 
 from django.contrib.auth.forms import AuthenticationForm
@@ -114,7 +114,7 @@ def buscar_sofa(request):
 
 def api_sofa(request):
     if request.method == "POST":
-        formulario = form_sillones(request.POST)
+        formulario = form_sofas(request.POST)
         print(formulario)
         if formulario.is_valid(): 
             informacion = formulario.cleaned_data
@@ -122,7 +122,7 @@ def api_sofa(request):
             sofa.save()
             return render(request, 'api_sofa.html')
     else:
-        formulario = form_sillones()
+        formulario = form_sofas()
     return render(request, 'api_sofa.html', {'formulario': formulario})
 
 ################# usuario ###########################################
@@ -151,16 +151,16 @@ def buscar_usuario(request):
 
 def api_usuario(request):
     if request.method == "POST":
-        formulario = form_usuario(request.POST)
+        formulario = form_usuarios(request.POST)
         print(formulario)
         if formulario.is_valid(): 
             informacion = formulario.cleaned_data
             sofa = Usuario(nombre= informacion['nombre'], apellido= informacion['apellido'], email= informacion['email'], telefono= informacion['telefono'])
             sofa.save()
-            return render(request, 'api_sofa.html')
+            return render(request, 'api_usuario.html')
     else:
-        formulario = form_usuario()
-    return render(request, 'api_usuarios.html', {'formulario': formulario})
+        formulario = form_usuarios()
+    return render(request, 'api_usuario.html', {'formulario': formulario})
 
 #################################### CRUD mesas  ######################################################################
 
@@ -247,6 +247,97 @@ def delete_sillas(request, silla_id):
 
     sillas = Silla.objects.all() #Trae todo
     return render(request, "crud_sillas/read_sillas.html", {"sillas": sillas})
+
+
+#################################### CRUD sofa  ######################################################################
+
+
+def create_sofa(request):
+    if request.method == 'POST':
+        sofa=Sofa(nombre=request.POST['nombre'], material=request.POST['material'], tipo=request.POST['tipo'], precio=request.POST['precio'])
+        sofa.save()
+        sofas=Sofa.objects.all()
+        return render(request, "crud_sofa/read_sofa.html", {"sofa":sofas})
+    return render(request, 'crud_sofa/create_sofa.html')
+    
+def read_sofa(request=None):
+    sofas= Sofa.objects.all()
+    return render(request,'crud_sofa/read_sofa.html',{'sofa': sofas})
+
+def update_sofa(request, sofa_id):
+    sofa = Sofa.objects.get(id= sofa_id)
+
+    if request.method == 'POST':
+        formulario = form_sofas(request.POST)
+
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            sofa.nombre = informacion['nombre']
+            sofa.material = informacion['material']
+            sofa.tipo = informacion['tipo']
+            sofa.precio = informacion['precio']
+            sofa.save()
+            sofas = Sofa.objects.all() #Trae todo
+            return render(request, "crud_sofa/read_sofa.html", {"sofa": sofas})
+    else:
+        formulario = form_sofas(initial={'nombre': sofa.nombre, 'material': sofa.material, 'tipo': sofa.tipo, 'precio': sofa.precio})
+    return render(request,"crud_sofa/update_sofa.html", {"formulario": formulario})
+
+
+def delete_sofa(request, sofa_id):
+    sofa= Sofa.objects.get(id = sofa_id)
+    sofa.delete()
+
+    sofas = Sofa.objects.all() #Trae todo
+    return render(request, "crud_sofa/read_sofa.html", {"sofa": sofas})
+
+
+
+
+#################################### CRUD usuario  ######################################################################
+
+
+def create_usuario(request):
+    if request.method == 'POST':
+        usuarios=Usuario(nombre=request.POST['nombre'], apellido=request.POST['apellido'], email=request.POST['email'], telefono=request.POST['telefono'])
+        usuarios.save()
+        usuarios= Usuario.objects.all()
+        return render(request, "crud_usuario/read_usuario.html", {"usuario":usuarios})
+    return render(request, 'crud_usuario/create_usuario.html')
+    
+def read_usuario(request=None):
+    usuarios= Usuario.objects.all()
+    return render(request,'crud_usuario/read_usuario.html',{'usuario': usuarios})
+
+def update_usuario(request, usuario_id):
+    usuario = Usuario.objects.get(id = usuario_id)
+
+    if request.method == 'POST':
+        formulario = form_usuarios(request.POST)
+
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            usuario.nombre = informacion['nombre']
+            usuario.apellido = informacion['apellido']
+            usuario.email = informacion['email']
+            usuario.telefono = informacion['telefono']
+            usuario.save()
+            usuarios = Usuario.objects.all() #Trae todo
+            return render(request, "crud_usuario/read_usuario.html", {"usuario": usuarios})
+    else:
+        formulario = form_usuarios(initial={'nombre': usuario.nombre, 'apellido': usuario.apellido, 'email': usuario.email, 'telefono': usuario.telefono})
+    return render(request,"crud_usuario/update_usuario.html", {"formulario": formulario})
+
+
+
+def delete_usuario(request, usuario_id):
+    usuario= Usuario.objects.get(id = usuario_id)
+    usuario.delete()
+
+    usuarios = Usuario.objects.all() #Trae todo
+    return render(request, "crud_usuario/read_usuario.html", {"usuario": usuarios})
+
+
 
 
 ################################  LOGIN  ###############################################################

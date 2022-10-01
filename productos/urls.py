@@ -21,11 +21,21 @@ urlpatterns = [
         path('create_mesas/', create_mesas),
         path('update_mesas/<mesa_id>', update_mesas),
         path('delete_mesas/<mesa_id>', delete_mesas),
-        
+
         path('read_sillas/', read_sillas),
         path('create_sillas/', create_sillas),
         path('update_sillas/<silla_id>', update_sillas),
         path('delete_sillas/<silla_id>', delete_sillas),
+
+        path('read_sofa/', read_sofa),
+        path('create_sofa/', create_sofa),
+        path('update_sofa/<sofa_id>', update_sofa),
+        path('delete_sofa/<sofa_id>', delete_sofa),
+
+        path('read_usuario/', read_usuario),
+        path('create_usuario/', create_usuario),
+        path('update_usuario/<usuario_id>', update_usuario),
+        path('delete_usuario/<usuario_id>', delete_usuario),
 
 
         path('login/', login_request),
