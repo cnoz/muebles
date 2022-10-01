@@ -21,8 +21,16 @@ urlpatterns = [
         path('create_mesas/', create_mesas),
         path('update_mesas/<mesa_id>', update_mesas),
         path('delete_mesas/<mesa_id>', delete_mesas),
+        
+        path('read_sillas/', read_sillas),
+        path('create_sillas/', create_sillas),
+        path('update_sillas/<silla_id>', update_sillas),
+        path('delete_sillas/<silla_id>', delete_sillas),
+
+
         path('login/', login_request),
         path('registro/', registro),
         path('logout/', LogoutView.as_view(template_name = 'home.html'), name = 'logout'),
+        path('perfil/editarperfil/', editarperfil),
         
 ]

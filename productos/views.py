@@ -1,18 +1,19 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from productos.forms import form_mesas, form_sillas, form_sillones, form_usuario, UserRegisterForm
+from productos.forms import form_mesas, form_sillas, form_sillones, form_usuario, UserRegisterForm, UserEditForm, ChangePasswordForm
 from productos.models import *
 
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 # Create your views here.
 
 
 def inicio(request):
     return render(request, 'index.html')
 
-##################### mesas         ###################################
+##################### mesas  ###################################
 @login_required
 def mesas(request):
     if request.method == "POST":
@@ -31,10 +32,9 @@ def buscar_mesas(request):
     #    material = Mesa.objects.filter(material__icontains= material)
     #    return render(request, "mesas.html", {'material': material})
     #
-    
     else:
         respuesta = "No enviaste datos"
-    #return render(request, "estudiantes.html") #si no cargo datos se queda en la pag.
+    #return render(request, "crud_productos/read_mesas.html") #si no cargo datos se queda en la pag.
     return HttpResponse(respuesta)
 
 def api_mesas(request):
@@ -86,6 +86,8 @@ def api_sillas(request):
     else:
         formulario = form_sillas()
     return render(request, 'api_sillas.html', {'formulario': formulario})
+
+
 ##################  sofa        ####################
 
 def sofa(request):
@@ -163,7 +165,6 @@ def api_usuario(request):
 #################################### CRUD mesas  ######################################################################
 
 
-
 def create_mesas(request):
     if request.method == 'POST':
         mesa=Mesa(nombre=request.POST['nombre'], material=request.POST['material'], tipo=request.POST['tipo'], precio=request.POST['precio'])
@@ -204,7 +205,51 @@ def delete_mesas(request, mesa_id):
     mesas = Mesa.objects.all() #Trae todo
     return render(request, "crud_productos/read_mesas.html", {"mesas": mesas})
 
-##  LOGIN #########################################################################################################
+#################################### CRUD sillas  ######################################################################
+
+
+def create_sillas(request):
+    if request.method == 'POST':
+        silla=Silla(nombre=request.POST['nombre'], material=request.POST['material'], tipo=request.POST['tipo'], precio=request.POST['precio'])
+        silla.save()
+        sillas=Silla.objects.all()
+        return render(request, "crud_sillas/read_sillas.html", {"sillas":sillas})
+    return render(request, 'crud_sillas/create_sillas.html')
+    
+def read_sillas(request=None):
+    sillas= Silla.objects.all()
+    return render(request,'crud_sillas/read_sillas.html',{'sillas': sillas})
+
+def update_sillas(request, silla_id):
+    sillas = Silla.objects.get(id = silla_id)
+
+    if request.method == 'POST':
+        formulario = form_sillas(request.POST)
+
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            sillas.nombre = informacion['nombre']
+            sillas.material = informacion['material']
+            sillas.tipo = informacion['tipo']
+            sillas.precio = informacion['precio']
+            sillas.save()
+            sillas = Silla.objects.all() #Trae todo
+            return render(request, "crud_sillas/read_sillas.html", {"sillas": sillas})
+    else:
+        formulario = form_sillas(initial={'nombre': sillas.nombre, 'material': sillas.material, 'tipo': sillas.tipo, 'precio': sillas.precio})
+    return render(request,"crud_sillas/update_sillas.html", {"formulario": formulario})
+
+
+
+def delete_sillas(request, silla_id):
+    silla= Silla.objects.get(id = silla_id)
+    silla.delete()
+
+    sillas = Silla.objects.all() #Trae todo
+    return render(request, "crud_sillas/read_sillas.html", {"sillas": sillas})
+
+
+################################  LOGIN  ###############################################################
 
 def login_request(request):    
     if request.method == 'POST':
@@ -248,3 +293,50 @@ def registro(request):
     #form = UserCreationForm()
     form = UserRegisterForm()
     return render(request, "registro.html", {'form': form})
+
+###################### PERFIL ######################################################
+
+@login_required
+
+def editarperfil(request):
+    usuario = request.user
+    user_basic_info = User.objects.get(id= usuario.id)
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, instance = usuario)
+        if form.is_valid():
+            #Datos que se van a actualizar
+            user_basic_info.username = form.cleaned_data.get('username')
+            user_basic_info.email = form.cleaned_data.get('email')
+            user_basic_info.first_name = form.cleaned_data.get('first_name')
+            user_basic_info.last_name = form.cleaned_data.get('last_name')
+            user_basic_info.save()
+            return render (request, 'home.html')
+        else:
+            return render (request, 'home.html', {'form':form})
+    else:
+        form = UserEditForm(initial= {'email': usuario.email, 'username': usuario.username, 'first_name': usuario.first_name,'last_name': usuario.last_name})
+    return render(request, 'editarperfil.html', {'form':form, 'usuario': usuario})
+
+
+@login_required
+def changepass(request):
+    usuario = request.user
+    if request.method == 'POST':
+        #form = PasswordChangeForm (data = request.POST, user= usuario)
+        form = ChangePasswordForm (data = request.POST, user= usuario)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return render(request, 'home.html')
+    else:
+        #form = PasswordChangeForm(request.user)
+        form = ChangePasswordForm(user = request.user)
+    return render(request, 'changepass.html', {'form':form, 'usuario':usuario})
+
+@login_required
+def perfilview(request):
+    #usuario = request.user
+    #user_basic_info = User.objects.get(id = usuario.id)
+    #print(usuario)
+    #return render(request, 'perfil.html', {'form':user_basic_info})
+    return render(request, 'perfil.html')
