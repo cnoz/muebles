@@ -22,12 +22,9 @@
             <ul class="nav nav-pills nav-fill">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/productos/">Home</a>
-                  </li>
+                  </li>               
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/productos/mesas">Mesa</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/productos/read_mesas">crud_Mesa</a>
+                  <a class="nav-link active" aria-current="page" href="/productos/read_mesas">Mesa +</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="/productos/read_sillas">Silla +</a>
@@ -38,9 +35,17 @@
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="/productos/read_usuario">Usuario +</a>
                 </li>
+
+                <li class="nav-item" style="position: absolute; right: 150px">
+                  <a class="nav-link active" aria-current="page" href="/productos/perfil/">{{ user.username }}</a>
+                </li>
+                <li class="nav-item" style="position: absolute; right: 250px">
+                  <img src='{{ avatar }}' width="40px">
+                </li>
+
                 <li class="nav-item" style="position: absolute; right: 0px">
                   <a class="nav-link active" aria-current="page" href="/productos/logout/">Salir</a>
-              </li>
+                </li>
             </ul>
  
         </div>  

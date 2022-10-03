@@ -65,5 +65,8 @@ class ChangePasswordForm(PasswordChangeForm):
            help_texts = {k:"" for k in fields}
 
 
-############################################################################################################
+#################################### AVATAR  ########################################################################
 
+
+class AvatarFormulario(forms.Form):
+    avatar = forms.ImageField()
