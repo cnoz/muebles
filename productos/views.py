@@ -18,7 +18,7 @@ def inicio(request):
         avatar = None
   
     #return render(request,'crud_sofa/read_sofa.html',{'sofa': sofas,'avatar': avatar })
-    return render(request, 'home.html',{'avatar':avatar})
+    return render(request, 'index.html',{'avatar':avatar})
 
 ##################### mesas  ###################################
 @login_required
@@ -507,7 +507,7 @@ def editarperfil(request):
                 avatar = avatar[0].image.url
             except:
                 avatar = None
-            return render(request, 'index.html', {'avatar': avatar})
+            return render(request, 'home.html', {'avatar': avatar})
             #return render (request, 'home.html')
         else:
             avatar = Avatar.objects.filter(user = request.user.id)
@@ -515,7 +515,7 @@ def editarperfil(request):
                 avatar = avatar[0].image.url
             except:
                 avatar = None
-            return render(request, 'index.html', {'form':form,'avatar': avatar})
+            return render(request, 'home.html', {'form':form,'avatar': avatar})
            
             #return render (request, 'home.html', {'form':form})
     else:
