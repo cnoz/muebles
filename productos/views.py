@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 # Create your views here.
 
-
+login_required
 def inicio(request):
     avatar = Avatar.objects.filter(user = request.user.id)
     try:
@@ -18,7 +18,7 @@ def inicio(request):
         avatar = None
   
     #return render(request,'crud_sofa/read_sofa.html',{'sofa': sofas,'avatar': avatar })
-    return render(request, 'index.html',{'avatar':avatar})
+    return render(request, 'home.html',{'avatar':avatar})
 
 ##################### mesas  ###################################
 @login_required
@@ -28,7 +28,7 @@ def mesas(request):
         mesa.save()
         return render(request, "index.html")
     return render(request, "mesas.html")
-
+login_required
 def buscar_mesas(request):
     if request.GET['nombre']:
         nombre = request.GET['nombre']
@@ -58,14 +58,14 @@ def api_mesas(request):
     return render(request, 'api_mesas.html', {'formulario': formulario})
 
 ####################  sillas        #####################################
-
+@login_required
 def sillas(request):
     if request.method == "POST":
         sl = Silla(nombre=request.POST['nombre'], material=request.POST['material'],tipo=request.POST['tipo'],precio=request.POST['precio'])
         sl.save()
         return render(request, "index.html")
     return render(request, "sillas.html")
-
+login_required
 def buscar_sillas(request):
     if request.GET['nombre']:
         nombre = request.GET['nombre']
@@ -96,7 +96,7 @@ def api_sillas(request):
 
 
 ##################  sofa        ####################
-
+@login_required
 def sofa(request):
     if request.method == "POST":
         sf = Sofa(nombre=request.POST['nombre'], material=request.POST['material'],tipo=request.POST['tipo'],precio=request.POST['precio'])
@@ -104,6 +104,7 @@ def sofa(request):
         return render(request, "index.html")
     return render(request, "sofa.html")
 
+login_required
 def buscar_sofa(request):
     if request.GET['nombre']:
         nombre = request.GET['nombre']
@@ -133,7 +134,7 @@ def api_sofa(request):
     return render(request, 'api_sofa.html', {'formulario': formulario})
 
 ################# usuario ###########################################
-
+@login_required
 def usuario(request):
     if request.method == "POST":
         user = Usuario(nombre=request.POST['nombre'], apellido=request.POST['apellido'],email=request.POST['email'],telefono=request.POST['telefono'])
@@ -141,6 +142,7 @@ def usuario(request):
         return render(request, "index.html")
     return render(request, "usuario.html")
 
+login_required
 def buscar_usuario(request):
     if request.GET['nombre']:
         nombre = request.GET['nombre']
@@ -185,7 +187,7 @@ def create_mesas(request):
 
         return render(request, "crud_productos/read_mesas.html", {"mesas":mesas,'avatar': avatar})
     return render(request, 'crud_productos/create_mesas.html')
-    
+@login_required    
 def read_mesas(request=None):
     mesas= Mesa.objects.all()
     avatar = Avatar.objects.filter(user = request.user.id)
@@ -195,7 +197,7 @@ def read_mesas(request=None):
         avatar = None
   
     return render(request,'crud_productos/read_mesas.html',{'mesas': mesas,'avatar': avatar})
-
+@login_required
 def update_mesas(request, mesa_id):
     mesas = Mesa.objects.get(id = mesa_id)
 
@@ -222,7 +224,7 @@ def update_mesas(request, mesa_id):
     return render(request,"crud_productos/update_mesas.html", {"formulario": formulario})
 
 
-
+@login_required
 def delete_mesas(request, mesa_id):
     mesa= Mesa.objects.get(id = mesa_id)
     mesa.delete()
@@ -251,7 +253,7 @@ def create_sillas(request):
             avatar = None
         return render(request, "crud_sillas/read_sillas.html", {"sillas":sillas, 'avatar':avatar})
     return render(request, 'crud_sillas/create_sillas.html')
-    
+@login_required    
 def read_sillas(request=None):
     sillas= Silla.objects.all()
     avatar = Avatar.objects.filter(user = request.user.id)
@@ -261,7 +263,7 @@ def read_sillas(request=None):
         avatar = None
   
     return render(request,'crud_sillas/read_sillas.html',{'sillas': sillas,'avatar': avatar})
-
+@login_required
 def update_sillas(request, silla_id):
     sillas = Silla.objects.get(id = silla_id)
 
@@ -287,7 +289,7 @@ def update_sillas(request, silla_id):
     return render(request,"crud_sillas/update_sillas.html", {"formulario": formulario})
 
 
-
+@login_required
 def delete_sillas(request, silla_id):
     silla= Silla.objects.get(id = silla_id)
     silla.delete()
@@ -316,7 +318,7 @@ def create_sofa(request):
             avatar = None
         return render(request, "crud_sofa/read_sofa.html", {"sofa":sofas, 'avatar':avatar})
     return render(request, 'crud_sofa/create_sofa.html')
-    
+@login_required    
 def read_sofa(request=None):
     sofas= Sofa.objects.all()
     avatar = Avatar.objects.filter(user = request.user.id)
@@ -326,7 +328,7 @@ def read_sofa(request=None):
         avatar = None
   
     return render(request,'crud_sofa/read_sofa.html',{'sofa': sofas,'avatar': avatar })
-
+@login_required
 def update_sofa(request, sofa_id):
     sofa = Sofa.objects.get(id= sofa_id)
 
@@ -351,7 +353,7 @@ def update_sofa(request, sofa_id):
         formulario = form_sofas(initial={'nombre': sofa.nombre, 'material': sofa.material, 'tipo': sofa.tipo, 'precio': sofa.precio})
     return render(request,"crud_sofa/update_sofa.html", {"formulario": formulario})
 
-
+@login_required
 def delete_sofa(request, sofa_id):
     sofa= Sofa.objects.get(id = sofa_id)
     sofa.delete()
@@ -382,7 +384,7 @@ def create_usuario(request):
             avatar = None
         return render(request, "crud_usuario/read_usuario.html", {"usuario":usuarios,'avatar':avatar})
     return render(request, 'crud_usuario/create_usuario.html')
-    
+@login_required    
 def read_usuario(request=None):
     usuarios= Usuario.objects.all()
     avatar = Avatar.objects.filter(user = request.user.id)
@@ -392,7 +394,7 @@ def read_usuario(request=None):
         avatar = None
   
     return render(request,'crud_usuario/read_usuario.html',{'usuario': usuarios,'avatar': avatar})
-
+@login_required
 def update_usuario(request, usuario_id):
     usuario = Usuario.objects.get(id = usuario_id)
 
@@ -417,8 +419,7 @@ def update_usuario(request, usuario_id):
         formulario = form_usuarios(initial={'nombre': usuario.nombre, 'apellido': usuario.apellido, 'email': usuario.email, 'telefono': usuario.telefono})
     return render(request,"crud_usuario/update_usuario.html", {"formulario": formulario})
 
-
-
+@login_required
 def delete_usuario(request, usuario_id):
     usuario= Usuario.objects.get(id = usuario_id)
     usuario.delete()
