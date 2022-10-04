@@ -3,10 +3,10 @@
 {% load static %}
 
 {% block contenido %}
-<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
-<link rel="stylesheet" href="{%static 'css/myestilo.css'%}">
-
-<form class="formDataMesas" method="POST" action="/productos/create_mesas/">{% csrf_token %}
+<h2>Mesas</h2>
+<body>
+    <h2>Mesas ingrese datos</h2>
+    <form class="formDataMesas" method="POST" action="/productos/create_mesas/">{% csrf_token %}
     <input type="text" name="nombre" placeholder="nombre">
     <input type="text" name="material" placeholder="material">
     <input type="text" name="tipo" placeholder="tipo">
@@ -14,5 +14,5 @@
     <button type="submit" class="btn btn-primary btndj">Registrar</button>
 
 </form>
-
+</body>
 {% endblock %}
