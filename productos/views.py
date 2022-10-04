@@ -34,11 +34,7 @@ def buscar_mesas(request):
         nombre = request.GET['nombre']
         mesas = Mesa.objects.filter(nombre__icontains= nombre)
         return render(request, "mesas.html", {'mesas': mesas})
-    #elif request.GET['material']:
-    #    material = request.GET['material']
-    #    material = Mesa.objects.filter(material__icontains= material)
-    #    return render(request, "mesas.html", {'material': material})
-    #
+   
     else:
         respuesta = "No enviaste datos"
     #return render(request, "crud_productos/read_mesas.html") #si no cargo datos se queda en la pag.
@@ -184,9 +180,13 @@ def create_mesas(request):
             avatar = avatar[0].image.url
         except:
             avatar = None
-
         return render(request, "crud_productos/read_mesas.html", {"mesas":mesas,'avatar': avatar})
-    return render(request, 'crud_productos/create_mesas.html')
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, 'crud_productos/create_mesas.html', {'avatar':avatar})
 @login_required    
 def read_mesas(request=None):
     mesas= Mesa.objects.all()
@@ -220,8 +220,13 @@ def update_mesas(request, mesa_id):
 
             return render(request, "crud_productos/read_mesas.html", {"mesas": mesas, 'avatar':avatar})
     else:
+        avatar = Avatar.objects.filter(user = request.user.id)
+        try:
+            avatar = avatar[0].image.url
+        except:
+                avatar = None
         formulario = form_mesas(initial={'nombre': mesas.nombre, 'material': mesas.material, 'tipo': mesas.tipo, 'precio':mesas.precio})
-    return render(request,"crud_productos/update_mesas.html", {"formulario": formulario})
+    return render(request,"crud_productos/update_mesas.html", {"formulario": formulario, 'avatar':avatar})
 
 
 @login_required
@@ -252,7 +257,13 @@ def create_sillas(request):
         except:
             avatar = None
         return render(request, "crud_sillas/read_sillas.html", {"sillas":sillas, 'avatar':avatar})
-    return render(request, 'crud_sillas/create_sillas.html')
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+            avatar = None
+    return render(request, 'crud_sillas/create_sillas.html',{'avata':avatar})
+
 @login_required    
 def read_sillas(request=None):
     sillas= Silla.objects.all()
@@ -285,8 +296,13 @@ def update_sillas(request, silla_id):
                 avatar = None
             return render(request, "crud_sillas/read_sillas.html", {"sillas": sillas, 'avatar':avatar})
     else:
+        avatar = Avatar.objects.filter(user = request.user.id)
+        try:
+            avatar = avatar[0].image.url
+        except:
+                avatar = None
         formulario = form_sillas(initial={'nombre': sillas.nombre, 'material': sillas.material, 'tipo': sillas.tipo, 'precio': sillas.precio})
-    return render(request,"crud_sillas/update_sillas.html", {"formulario": formulario})
+    return render(request,"crud_sillas/update_sillas.html", {"formulario": formulario,'avatar':avatar})
 
 
 @login_required
@@ -317,7 +333,12 @@ def create_sofa(request):
         except:
             avatar = None
         return render(request, "crud_sofa/read_sofa.html", {"sofa":sofas, 'avatar':avatar})
-    return render(request, 'crud_sofa/create_sofa.html')
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, 'crud_sofa/create_sofa.html', {'avatar':avatar})
 @login_required    
 def read_sofa(request=None):
     sofas= Sofa.objects.all()
@@ -350,8 +371,13 @@ def update_sofa(request, sofa_id):
                 avatar = None
             return render(request, "crud_sofa/read_sofa.html", {"sofa": sofas,'avatar':avatar})
     else:
+        avatar = Avatar.objects.filter(user = request.user.id)
+        try:
+            avatar = avatar[0].image.url
+        except:
+            avatar = None
         formulario = form_sofas(initial={'nombre': sofa.nombre, 'material': sofa.material, 'tipo': sofa.tipo, 'precio': sofa.precio})
-    return render(request,"crud_sofa/update_sofa.html", {"formulario": formulario})
+    return render(request,"crud_sofa/update_sofa.html", {"formulario": formulario, 'avatar':avatar})
 
 @login_required
 def delete_sofa(request, sofa_id):
@@ -383,7 +409,12 @@ def create_usuario(request):
         except:
             avatar = None
         return render(request, "crud_usuario/read_usuario.html", {"usuario":usuarios,'avatar':avatar})
-    return render(request, 'crud_usuario/create_usuario.html')
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, 'crud_usuario/create_usuario.html', {'avatar':avatar})
 @login_required    
 def read_usuario(request=None):
     usuarios= Usuario.objects.all()
@@ -416,8 +447,13 @@ def update_usuario(request, usuario_id):
                 avatar = None
             return render(request, "crud_usuario/read_usuario.html", {"usuario": usuarios,'avatar':avatar})
     else:
+        avatar = Avatar.objects.filter(user = request.user.id)
+        try:
+            avatar = avatar[0].image.url
+        except:
+            avatar = None
         formulario = form_usuarios(initial={'nombre': usuario.nombre, 'apellido': usuario.apellido, 'email': usuario.email, 'telefono': usuario.telefono})
-    return render(request,"crud_usuario/update_usuario.html", {"formulario": formulario})
+    return render(request,"crud_usuario/update_usuario.html", {"formulario": formulario, 'avatar':avatar})
 
 @login_required
 def delete_usuario(request, usuario_id):

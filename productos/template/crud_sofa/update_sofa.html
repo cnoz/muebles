@@ -1,4 +1,8 @@
+{% extends "index.html" %}
+
 {% load static %}
+
+{% block contenido %}
 <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
 <form method="POST">{% csrf_token %}
     <table>
@@ -6,3 +10,4 @@
     </table>
     <button type="submit" class="btn btn-success" >Registrar</button>
 </form>
+{% endblock %}
