@@ -261,8 +261,8 @@ def create_sillas(request):
     try:
         avatar = avatar[0].image.url
     except:
-            avatar = None
-    return render(request, 'crud_sillas/create_sillas.html',{'avata':avatar})
+        avatar = None
+    return render(request, 'crud_sillas/create_sillas.html', {"avatar":avatar})
 
 @login_required    
 def read_sillas(request=None):
