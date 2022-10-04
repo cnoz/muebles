@@ -224,7 +224,7 @@ def update_mesas(request, mesa_id):
         try:
             avatar = avatar[0].image.url
         except:
-                avatar = None
+               avatar = None
         formulario = form_mesas(initial={'nombre': mesas.nombre, 'material': mesas.material, 'tipo': mesas.tipo, 'precio':mesas.precio})
     return render(request,"crud_productos/update_mesas.html", {"formulario": formulario, 'avatar':avatar})
 
@@ -300,9 +300,9 @@ def update_sillas(request, silla_id):
         try:
             avatar = avatar[0].image.url
         except:
-                avatar = None
+               avatar = None
         formulario = form_sillas(initial={'nombre': sillas.nombre, 'material': sillas.material, 'tipo': sillas.tipo, 'precio': sillas.precio})
-    return render(request,"crud_sillas/update_sillas.html", {"formulario": formulario,'avatar':avatar})
+    return render(request,"crud_sillas/update_sillas.html", {"formulario": formulario, "avatar":avatar})
 
 
 @login_required
