@@ -400,21 +400,44 @@ def delete_sofa(request, sofa_id):
 
 def create_usuario(request):
     if request.method == 'POST':
-        usuarios=Usuario(nombre=request.POST['nombre'], apellido=request.POST['apellido'], email=request.POST['email'], telefono=request.POST['telefono'])
-        usuarios.save()
-        usuarios= Usuario.objects.all()
+        formulario = form_usuarios(request.POST)
+
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            usuarios = Usuario(nombre= informacion["nombre"],apellido= informacion["apellido"],email= informacion["email"],telefono= informacion["telefono"],)
+            usuarios.save()
+            avatar = Avatar.objects.filter(user = request.user.id)
+            try:
+                avatar = avatar[0].image.url
+            except:
+                avatar = None
+            return render(request, "crud_usuario/read_usuario.html", {"usuario": usuarios,'avatar':avatar})
+    else:
         avatar = Avatar.objects.filter(user = request.user.id)
         try:
             avatar = avatar[0].image.url
         except:
             avatar = None
-        return render(request, "crud_usuario/read_usuario.html", {"usuario":usuarios,'avatar':avatar})
-    avatar = Avatar.objects.filter(user = request.user.id)
-    try:
-        avatar = avatar[0].image.url
-    except:
-        avatar = None
-    return render(request, 'crud_usuario/create_usuario.html', {'avatar':avatar})
+        formulario = form_usuarios()
+    return render(request,"crud_usuario/update_usuario.html", {"formulario": formulario, 'avatar':avatar})
+
+    #if request.method == 'POST':
+    #    usuarios=Usuario(nombre=request.POST['nombre'], apellido=request.POST['apellido'], email=request.POST['email'], telefono=request.POST['telefono'])
+    #    usuarios.save()
+    #    usuarios= Usuario.objects.all()
+    #    avatar = Avatar.objects.filter(user = request.user.id)
+    #    try:
+    #        avatar = avatar[0].image.url
+    #    except:
+    #        avatar = None
+    #    return render(request, "crud_usuario/read_usuario.html", {"usuario":usuarios,'avatar':avatar})
+    #avatar = Avatar.objects.filter(user = request.user.id)
+    #try:
+    #    avatar = avatar[0].image.url
+    #except:
+    #    avatar = None
+    #return render(request, 'crud_usuario/create_usuario.html', {'avatar':avatar})
+
 @login_required    
 def read_usuario(request=None):
     usuarios= Usuario.objects.all()
