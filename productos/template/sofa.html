@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+
+{% block contenido %}
+
+
+    
+<h2>Bienvenido a la pagina de los sofa</h2>
+
+<div class="contenidoSofa">
+    <form class="formDataSofa" action="/productos/sofa/" method="POST"> {% csrf_token %}
+        <input type="text" name="nombre" placeholder="nombre">
+        <input type="text" name="material" placeholder="material">
+        <input type="text" name="tipo" placeholder="tipo">
+        <input type="number" name="precio" placeholder="precio">
+        <button type="submit" class="btn btn-primary btndj">Registrar</button>
+    </form>
+</div>
+<div>
+    <form class="formDataSofa" action="/productos/buscar_sofa/" method="GET"> 
+        <input type="text" name="nombre" placeholder="nombre">
+        <button type="submit" class="btn btn-primary btndj">Buscar</button>
+    </form>
+</div>
+
+
+
+
+<div>
+    {% if sofas %}
+    <ul>
+        {% for sofa in sofas %}
+        <li>{{ sofa.nombre}}</li>
+        <li>{{ sofa.material}}</li>
+        <li>{{ sofa.tipo}}</li>
+        <li>{{ sofa.precio}}</li>
+
+        {% endfor %}
+    </ul>
+
+
+    {% else %} 
+    <p><h5>No hay datos</h5></p>
+
+    {% endif %}
+</div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "home.html" %}
+
+{% load static %}
+
+{% block contenido %}
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        <button type="submit" >Vamo a Darle</button>
+    </form>
+
+
+{% endblock %}
+</body>

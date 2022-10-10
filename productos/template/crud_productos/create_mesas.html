@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block contenido %}
+<h2>Mesas</h2>
+<html>
+<body>
+    <h2>Mesas ingrese datos</h2>
+    <form class="formDataMesas" method="POST" action="/productos/create_mesas/">{% csrf_token %}
+    <input type="text" name="nombre" placeholder="nombre">
+    <input type="text" name="material" placeholder="material">
+    <input type="text" name="tipo" placeholder="tipo">
+    <input type="number" name="precio" placeholder="precio">
+    <button type="submit" class="btn btn-primary btndj">Vamo a Darle</button>
+
+</form>
+</body>
+{% endblock %}
+
+
+
+</html>

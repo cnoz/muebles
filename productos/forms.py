@@ -1,5 +1,6 @@
 from django import forms
-
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
+from django.contrib.auth.models import User
 
 class form_mesas(forms.Form):
     nombre = forms.CharField(max_length= 30)
@@ -13,14 +14,59 @@ class form_sillas(forms.Form):
     tipo = forms.CharField(max_length= 30)
     precio = forms.IntegerField()
 
-class form_sillones(forms.Form):
-    nombre = forms.CharField(max_length= 30)
+class form_sofas(forms.Form):
+    nombre = forms.CharField(max_length= 30) 
     material = forms.CharField(max_length= 30)
     tipo = forms.CharField(max_length= 30)
     precio = forms.IntegerField()
 
-class form_usuario(forms.Form):
+class form_usuarios(forms.Form):
     nombre = forms.CharField(max_length= 30)
     apellido= forms.CharField(max_length= 30)
     email = forms.EmailField()
     telefono = forms.IntegerField()
+
+
+##################################### registrar usuarios #######################
+
+class UserRegisterForm(UserCreationForm):
+    email= forms.EmailField()
+    password1= forms.CharField(label='Contraseña', widget= forms.PasswordInput)
+    password2= forms.CharField(label='Repetir Contraseña', widget= forms.PasswordInput)
+
+    class Meta:
+        model= User
+        fields= ['username','email', 'password1', 'password2']
+        help_texts = {k: "" for k in fields} 
+
+##################################### editar perfiles ###########################
+
+class UserEditForm(UserChangeForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Username'}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder':'Email'}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'First name'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Last name'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
+
+    class Meta:
+        model = User
+        fields = ['username', 'email','first_name', 'last_name', 'password']
+        help_texts = {k:"" for k in fields}
+
+
+class ChangePasswordForm(PasswordChangeForm):
+    old_password = forms.CharField(label="", widget= forms.PasswordInput(attrs={'placeholder': "Old Password", }))
+    new_password1 = forms.CharField(label="",widget= forms.PasswordInput(attrs={'placeholder': "New password"}))
+    new_password2 = forms.CharField(label="",widget= forms.PasswordInput(attrs={'placeholder': "Confirm new password"}))
+    
+    class Meta:
+           model = User
+           fields = ['old_password', 'new_password1', 'new_password2']
+           help_texts = {k:"" for k in fields}
+
+
+#################################### AVATAR  ########################################################################
+
+
+class AvatarFormulario(forms.Form):
+    avatar = forms.ImageField()

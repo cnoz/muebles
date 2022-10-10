@@ -1,0 +1,47 @@
+.contenido1{
+    position: relative;
+    top: 80px;
+    border: 2px solid rgb(170, 36, 36);
+}
+
+.contenidoHome{
+    position: relative;
+    top: 50px;
+    border: 2px solid rgb(170, 36, 36);
+}
+
+
+.contenidoMesas{
+    background-color: #544803;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+
+}
+.contenidoSillas{
+    background-color: #544803;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+
+}
+.contenidoSofa{
+    background-color: #544803;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+
+}
+
+
+.contenidoUsuarios{
+    background-color: #544803;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+
+}

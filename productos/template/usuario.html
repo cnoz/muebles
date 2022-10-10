@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+
+
+{% block contenido %}
+
+
+<h2>Bienvenido a la pagina de los usuarios</h2>
+
+<div class="contenidoUsuarios">
+    <form class="formDataUsuarios" action="/productos/usuario/" method="POST"> {% csrf_token %}
+        <input type="text" name="nombre" placeholder="nombre">
+        <input type="text" name="apellido" placeholder="apellido">
+        <input type="email" name="email" placeholder="email">
+        <input type="number" name="telefono" placeholder="telefono">
+        <button type="submit" class="btn btn-primary btndj">Registrar</button>
+    </form>
+</div>
+<div>
+    <form class="formDataUsuarios" action="/productos/buscar_usuario/" method="GET"> 
+        <input type="text" name="nombre" placeholder="nombre">
+        <button type="submit" class="btn btn-primary btndj">Buscar</button>
+    </form>
+</div>
+
+
+
+
+<div>
+    {% if usuario %}
+    <ul>
+        {% for user in usuario %}
+        <li>{{ user.nombre}}</li>
+        <li>{{ user.apellido}}</li>
+        <li>{{ user.email}}</li>
+        <li>{{ user.telefono}}</li>
+
+        {% endfor %}
+    </ul>
+
+
+    {% else %} 
+    <p><h5>No hay datos</h5></p>
+
+    {% endif %}
+</div>
+    {% endblock %}
+</body>
+</html>
