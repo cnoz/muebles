@@ -1,0 +1,32 @@
+
+
+
+<h2>Bienvenido a la pagina de compras </h2>
+<h4>Mesas</h4>
+    {% for mesa in mesas %}
+        <li>
+            {{ mesa }}
+
+        </li>
+        <br>
+    {% endfor %}
+    
+    <h4>Sillas</h4>
+
+    {% for silla in sillas %}
+    <li>
+        {{ silla }}
+
+    </li>
+    <br>
+{% endfor %}
+
+<h4>Sofa</h4>
+
+{% for sof in sofa %}
+<li>
+    {{ sof }}
+
+</li>
+<br>
+{% endfor %}

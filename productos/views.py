@@ -711,3 +711,18 @@ def AgregarAvatar(request):
         except:
             form = AvatarFormulario()
     return render(request, 'AgregarAvatar.html', {'form': form})
+
+
+def compras (request):
+    mesas= Mesa.objects.all()
+    sillas= Silla.objects.all()
+    sofa= Sofa.objects.all()
+
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+  
+    return render(request,'compras.html',{'mesas': mesas,'sillas':sillas,'sofa':sofa,'avatar': avatar})
+    
