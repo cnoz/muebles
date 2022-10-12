@@ -1,0 +1,23 @@
+
+
+<h4>Mesas</h4>
+
+<div>
+    <form class="formDataMesas" action="/productos/carrito/" method="GET"> 
+        <input type="text" name="nombre" placeholder="nombre">
+        <button type="submit" class="btn btn-primary btndj">Buscar</button>
+    </form>
+</div>
+
+{% if mesas %}
+<ul>
+    {% for mesa in mesas %}
+    <li>{{ mesa.nombre}}</li>
+    <li>{{ mesa.material}}</li>
+    <li>{{ mesa.tipo}}</li>
+    <li>{{ mesa.precio}}</li>
+
+    {% endfor %}
+</ul>
+
+{% endif %} 

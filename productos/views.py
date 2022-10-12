@@ -727,3 +727,15 @@ def compras (request):
   
     return render(request,'compras.html',{'mesas': mesas,'sillas':sillas,'sofa':sofa,'avatar': avatar})
     
+
+def carrito(request):
+    if request.GET['nombre']:
+        nombre= request.GET['nombre']
+        mesas=Mesa.objects.filter(nombre__icontains=nombre)
+        return render(request, 'carrito.html', {'mesas': mesas })
+    else:
+        respuesta="no seleccionaste datos"
+    return HttpResponse(respuesta)
+#def carrito(request):
+#   
+#    return render(request, "carrito.html", {'mesas': mesas})

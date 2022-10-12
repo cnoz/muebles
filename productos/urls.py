@@ -45,5 +45,6 @@ urlpatterns = [
         path('perfil/', perfilview),
         path('perfil/changepass/', changepass),
         path('perfil/changeAvatar/', AgregarAvatar),
-        path('compras/', compras)       
+        path('compras/', compras),
+        path('carrito/', carrito)       
 ]
