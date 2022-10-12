@@ -712,6 +712,7 @@ def AgregarAvatar(request):
             form = AvatarFormulario()
     return render(request, 'AgregarAvatar.html', {'form': form})
 
+####################### compras ##############################
 
 def compras (request):
     mesas= Mesa.objects.all()
