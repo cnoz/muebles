@@ -711,3 +711,31 @@ def AgregarAvatar(request):
         except:
             form = AvatarFormulario()
     return render(request, 'AgregarAvatar.html', {'form': form})
+
+####################### compras ##############################
+
+def compras (request):
+    mesas= Mesa.objects.all()
+    sillas= Silla.objects.all()
+    sofa= Sofa.objects.all()
+
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+  
+    return render(request,'compras.html',{'mesas': mesas,'sillas':sillas,'sofa':sofa,'avatar': avatar})
+    
+
+#def carrito(request):
+#    if request.GET['nombre']:
+#        nombre= request.GET['nombre']
+#        mesas=Mesa.objects.filter(nombre__icontains=nombre)
+#        return render(request, 'carrito.html', {'mesas': mesas })
+#    else:
+#        respuesta="no seleccionaste datos"
+#    return HttpResponse(respuesta)
+def carrito(request):
+#   
+    return render(request, "carrito.html", {'mesas': mesas})
