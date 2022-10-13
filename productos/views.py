@@ -739,3 +739,22 @@ def compras (request):
 def carrito(request):
 #   
     return render(request, "carrito.html", {'mesas': mesas})
+
+
+
+
+def compra_silla(request):
+
+    return render(request, "compra_exitosa.html")
+
+def compra_sofa(request):
+
+    return render(request, "compra_exitosa.html")
+
+def compra_mesa(request):
+
+    return render(request, "compra_exitosa.html")
+
+def compra_usuario(request):
+
+    return render(request, "compra_exitosa.html")

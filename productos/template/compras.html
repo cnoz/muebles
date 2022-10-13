@@ -1,12 +1,16 @@
 
+{% extends "index.html" %}
 
+{% load static %}
+
+{% block contenido %}
 
 <h2>Bienvenido a la pagina de compras </h2>
 <h4>Mesas</h4>
     {% for mesa in mesas %}
         <li>
             {{ mesa }}
-            <a href="/productos/carrito/" class="btn btn-warning">llevar</a>
+            <a href="/productos/compra_mesa/" class="btn btn-warning">Comprar</a>
         </li>
         <br>
     {% endfor %}
@@ -17,18 +21,22 @@
     {% for silla in sillas %}
     <li>
         {{ silla }}
+        <a href="/productos/compra_silla/" class="btn btn-warning">Comprar</a>
+    </li>
+    <br>
+    {% endfor %}
+
+
+    <h4>Sofa</h4>
+
+    {% for sof in sofa %}
+    <li>
+        {{ sof }}
+        <a href="/productos/compra_sofa/" class="btn btn-warning">Comprar</a>
 
     </li>
     <br>
-{% endfor %}
+    {% endfor %}
 
 
-<h4>Sofa</h4>
-
-{% for sof in sofa %}
-<li>
-    {{ sof }}
-
-</li>
-<br>
-{% endfor %}
+{% endblock %}
