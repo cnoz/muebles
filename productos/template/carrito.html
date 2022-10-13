@@ -9,15 +9,3 @@
     </form>
 </div>
 
-{% if mesas %}
-<ul>
-    {% for mesa in mesas %}
-    <li>{{ mesa.nombre}}</li>
-    <li>{{ mesa.material}}</li>
-    <li>{{ mesa.tipo}}</li>
-    <li>{{ mesa.precio}}</li>
-
-    {% endfor %}
-</ul>
-
-{% endif %} 
