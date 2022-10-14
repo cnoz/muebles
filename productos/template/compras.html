@@ -7,6 +7,7 @@
 
 <h2>Bienvenido a la pagina de compras </h2>
 <h4>Mesas</h4>
+    <ul>
     {% for mesa in mesas %}
         <li>
             {{ mesa }}
@@ -14,10 +15,10 @@
         </li>
         <br>
     {% endfor %}
-    
+    </ul>
 
     <h4>Sillas</h4>
-
+    <ul>
     {% for silla in sillas %}
     <li>
         {{ silla }}
@@ -25,10 +26,10 @@
     </li>
     <br>
     {% endfor %}
-
+    </ul>
 
     <h4>Sofa</h4>
-
+    <ul>
     {% for sof in sofa %}
     <li>
         {{ sof }}
@@ -37,6 +38,6 @@
     </li>
     <br>
     {% endfor %}
-
+    </ul>
 
 {% endblock %}
