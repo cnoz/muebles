@@ -745,17 +745,33 @@ def carrito(request):
 
 
 def compra_silla(request):
-
-    return render(request, "compra_exitosa.html")
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, "compra_exitosa.html",{'avatar': avatar})
 
 def compra_sofa(request):
-
-    return render(request, "compra_exitosa.html")
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, "compra_exitosa.html",{'avatar': avatar})
 
 def compra_mesa(request):
-
-    return render(request, "compra_exitosa.html")
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, "compra_exitosa.html",{'avatar': avatar})
 
 def compra_usuario(request):
-
-    return render(request, "compra_exitosa.html")
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+    return render(request, "compra_exitosa.html",{'avatar': avatar})
