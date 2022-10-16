@@ -5,7 +5,7 @@ from productos.models import *
 
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 from django.contrib.admin.views.decorators import staff_member_required
@@ -211,7 +211,7 @@ def create_mesas(request):
     #except:
     #    avatar = None
     #return render(request, 'crud_productos/create_mesas.html', {'avatar':avatar})
-@staff_member_required
+@staff_member_required(redirect_field_name='next', login_url='/productos/compras/') #redirect_field_name='next',--> se puede sacar
 @login_required    
 def read_mesas(request=None):
     mesas= Mesa.objects.all()
