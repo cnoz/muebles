@@ -7,6 +7,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
+
+from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
 
 login_required
@@ -209,6 +211,7 @@ def create_mesas(request):
     #except:
     #    avatar = None
     #return render(request, 'crud_productos/create_mesas.html', {'avatar':avatar})
+@staff_member_required
 @login_required    
 def read_mesas(request=None):
     mesas= Mesa.objects.all()
@@ -506,7 +509,7 @@ def create_usuario(request):
     #    avatar = None
     #return render(request, 'crud_usuario/create_usuario.html', {'avatar':avatar})
 
-@login_required    
+@login_required 
 def read_usuario(request=None):
     usuarios= Usuario.objects.all()
     avatar = Avatar.objects.filter(user = request.user.id)

@@ -9,21 +9,42 @@
 <h4 style="text-align: center;">Mesas</h4>
     <ul>
     <div class="container">
+        <div style="float:right;">
+        
+           <!-- <p style="color:green; ">Texto de prueba</p>-->
+            {% if request.user.is_authenticated %} 
+            
+            {% include "widget_carro.html" %} 
+            
+            {% else %}
+            <div class="alert alert-danger text-center">login para ver carro</div> 
+            {% endif %}
+
+        </div>
+    
         <div class="row">
+
     {% for mesa in mesas %}
         <div class="col-md-3">
 
-        <div class="card" style="width: 100%; margin: 5px 5px;">
+            <div class="card" style="width: 100%; margin: 5px 5px;">
 
-            <img src="" class="card-img-top">
+                <img src="" class="card-img-top">
 
-            <div class="card-body" style="text-align: center;">
-                <h6 class="card-title">{{mesa.nombre}}</h6>
-                <p class="card-text">&nbsp; $ {{mesa.precio}}</p>
-                <a href="/productos/compra_mesa/" class="btn btn-warning">Comprar</a>
-            </div>
+                <div class="card-body" style="text-align: center;">
+                    <h6 class="card-title">{{mesa.nombre}}</h6>
+                    <p class="card-text"> $ {{mesa.precio}}</p>
+                    
 
-        </div>
+                    
+                </div> <!-- card body cierre-->
+                    <div class="card-footer text-center">
+
+                        <a href="/productos/compra_mesa/" class="btn btn-success">Comprar</a>   
+    
+                    </div>
+
+            </div> <!-- card que se cierra-->
         </div>
 
         <!--<li>
