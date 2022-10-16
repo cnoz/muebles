@@ -6,6 +6,9 @@
 {% block contenido %}
 
 <h2>Bienvenido a la pagina de compras </h2>
+
+<!----------------------------------------------------------------------->
+
 <h4 style="text-align: center;">Mesas</h4>
     <ul>
     <div class="container">
@@ -27,7 +30,7 @@
     {% for mesa in mesas %}
         <div class="col-md-3">
 
-            <div class="card" style="width: 100%; margin: 5px 5px;">
+            <div class="card" style="width: 100%; margin: 5px 5px;"> <!--card qeu se abre-->
 
                 <img src="" class="card-img-top">
 
@@ -37,14 +40,14 @@
                     
 
                     
-                </div> <!-- card body cierre-->
+                </div> <!-- card body cierre, imagen textos-->
                     <div class="card-footer text-center">
 
                         <a href="/productos/compra_mesa/" class="btn btn-success">Comprar</a>   
     
                     </div>
 
-            </div> <!-- card que se cierra-->
+            </div> <!-- card columnas que se cierra-->
         </div>
 
         <!--<li>
@@ -58,8 +61,8 @@
     </div>
     </ul>
     
-
-    <h4>Sillas</h4>
+<!------------------------------------------------------->
+   
     <h4 style="text-align: center;">Sillas</h4>
     <ul>
     <div class="container">
@@ -71,12 +74,12 @@
             {% include "widget_carro.html" %} 
             
             {% else %}
-            <div class="alert alert-danger text-center">login para ver carro</div> 
+                <div class="alert alert-danger text-center">login para ver carro</div> 
             {% endif %}
 
         </div>
     
-        <div class="row">
+    <div class="row">
 
     {% for silla in sillas %}
         <div class="col-md-3">
@@ -92,27 +95,23 @@
 
                     
                 </div> <!-- card body cierre-->
-                    <div class="card-footer text-center">
+                <div class="card-footer text-center">
 
-                        <a href="/productos/compra_sila/" class="btn btn-success">Comprar</a>   
+                        <a href="/productos/compra_silla/" class="btn btn-success">Comprar</a>   
     
-                    </div>
+                </div>
 
             </div> <!-- card que se cierra-->
         </div>
 
-        <!--<li>
-            {{ mesa }}
-            <a href="/productos/compra_mesa/" class="btn btn-warning">Comprar</a>
-
-        </li>-->
-        <br>
+     
     {% endfor %}
-        </div>
-    </div>
+    </div> <!-- class row-->
+    </div> <!-- class container-->
     </ul>
 
-    <h4>Sofa</h4>
+  <!------------------------------------------>
+  
     <h4 style="text-align: center;">Sofa</h4>
     <ul>
     <div class="container">
@@ -124,12 +123,12 @@
             {% include "widget_carro.html" %} 
             
             {% else %}
-            <div class="alert alert-danger text-center">login para ver carro</div> 
+                <div class="alert alert-danger text-center">login para ver carro</div> 
             {% endif %}
 
         </div>
     
-        <div class="row">
+    <div class="row">
 
     {% for sof in sofa %}
         <div class="col-md-3">
@@ -145,35 +144,19 @@
 
                     
                 </div> <!-- card body cierre-->
-                    <div class="card-footer text-center">
+                <div class="card-footer text-center">
 
                         <a href="/productos/compra_sofa/" class="btn btn-success">Comprar</a>   
     
-                    </div>
+                </div>
 
             </div> <!-- card que se cierra-->
         </div>
 
-        <!--<li>
-            {{ mesa }}
-            <a href="/productos/compra_mesa/" class="btn btn-warning">Comprar</a>
-
-        </li>-->
-        <br>
+     
     {% endfor %}
-        </div>
-    </div>
-    </ul>
-    <!--
-    <ul>
-    {% for sof in sofa %}
-    <li>
-        {{ sof }}
-        <a href="/productos/compra_sofa/" class="btn btn-warning">Comprar</a>
-
-    </li>
-    <br>
-    {% endfor %}
+    </div> <!-- class row-->
+    </div> <!-- class container-->
     </ul>
 
-    {% endblock %}-->
+   {% endblock %} 
