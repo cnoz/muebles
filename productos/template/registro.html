@@ -7,7 +7,11 @@
     <form action="" method="POST">
         {% csrf_token %}
         
-        {{ form.as_p }}
+        <!--{{ form.as_p }}-->
+        <table>
+        {{ form.as_table }}
+        </table>
+
         <button type="submit">Registrarte</button>
     </form>
 
