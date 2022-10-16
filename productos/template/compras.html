@@ -1,34 +1,43 @@
 
+{% extends "index.html" %}
 
+{% load static %}
+
+{% block contenido %}
 
 <h2>Bienvenido a la pagina de compras </h2>
 <h4>Mesas</h4>
+    <ul>
     {% for mesa in mesas %}
         <li>
-            {{ mesa.nombre }}
-            <a href="/productos/carrito/" class="btn btn-warning">llevar</a>
+            {{ mesa }}
+            <a href="/productos/compra_mesa/" class="btn btn-warning">Comprar</a>
         </li>
         <br>
     {% endfor %}
-    
+    </ul>
 
     <h4>Sillas</h4>
-
+    <ul>
     {% for silla in sillas %}
     <li>
         {{ silla }}
+        <a href="/productos/compra_silla/" class="btn btn-warning">Comprar</a>
+    </li>
+    <br>
+    {% endfor %}
+    </ul>
+
+    <h4>Sofa</h4>
+    <ul>
+    {% for sof in sofa %}
+    <li>
+        {{ sof }}
+        <a href="/productos/compra_sofa/" class="btn btn-warning">Comprar</a>
 
     </li>
     <br>
-{% endfor %}
+    {% endfor %}
+    </ul>
 
-
-<h4>Sofa</h4>
-
-{% for sof in sofa %}
-<li>
-    {{ sof }}
-
-</li>
-<br>
-{% endfor %}
+{% endblock %}

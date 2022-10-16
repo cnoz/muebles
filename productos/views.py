@@ -5,7 +5,7 @@ from productos.models import *
 
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 # Create your views here.
 
@@ -28,7 +28,7 @@ def mesas(request):
         mesa.save()
         return render(request, "index.html")
     return render(request, "mesas.html")
-login_required
+@login_required
 def buscar_mesas(request):
     if request.GET['nombre']:
         nombre = request.GET['nombre']
@@ -736,6 +736,26 @@ def compras (request):
 #    else:
 #        respuesta="no seleccionaste datos"
 #    return HttpResponse(respuesta)
+##################################
 def carrito(request):
 #   
     return render(request, "carrito.html", {'mesas': mesas})
+
+
+
+
+def compra_silla(request):
+
+    return render(request, "compra_exitosa.html")
+
+def compra_sofa(request):
+
+    return render(request, "compra_exitosa.html")
+
+def compra_mesa(request):
+
+    return render(request, "compra_exitosa.html")
+
+def compra_usuario(request):
+
+    return render(request, "compra_exitosa.html")
