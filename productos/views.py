@@ -795,6 +795,8 @@ def compra_mesa(request):
         avatar = None
     return render(request, "compra_exitosa.html",{'avatar': avatar})
 
+
+
 def compra_usuario(request):
     avatar = Avatar.objects.filter(user = request.user.id)
     try:
