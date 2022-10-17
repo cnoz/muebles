@@ -46,7 +46,7 @@ urlpatterns = [
         path('perfil/changepass/', changepass),
         path('perfil/changeAvatar/', AgregarAvatar),
         path('compras/', compras),
-        #path('carrito/', carrito),      
+        path('comprass/', compras2),      
         path('compra_silla/', compra_silla), 
         path('compra_mesa/', compra_mesa),     
         path('compra_sofa/', compra_sofa),    

@@ -1,0 +1,162 @@
+
+{% extends "home2.html" %}
+
+{% load static %}
+
+{% block contenido %}
+
+<h2>Bienvenido a la pagina de compras </h2>
+
+<!----------------------------------------------------------------------->
+
+<h4 style="text-align: center;">Mesas</h4>
+    <ul>
+    <div class="container">
+        <div style="float:right;">
+        
+           <!-- <p style="color:green; ">Texto de prueba</p>-->
+            {% if request.user.is_authenticated %} 
+            
+            {% include "widget_carro.html" %} 
+            
+            {% else %}
+            <div class="alert alert-danger text-center">login para ver carro</div> 
+            {% endif %}
+
+        </div>
+    
+        <div class="row">
+
+    {% for mesa in mesas %}
+        <div class="col-md-3">
+
+            <div class="card" style="width: 100%; margin: 5px 5px;"> <!--card qeu se abre-->
+
+                <img src="" class="card-img-top">
+
+                <div class="card-body" style="text-align: center;">
+                    <h6 class="card-title">{{mesa.nombre}}</h6>
+                    <p class="card-text"> $ {{mesa.precio}}</p>
+                    
+
+                    
+                </div> <!-- card body cierre, imagen textos-->
+                    <div class="card-footer text-center">
+
+                        <a href="/productos/compra_mesa/" class="btn btn-success">Comprar</a>   
+    
+                    </div>
+
+            </div> <!-- card columnas que se cierra-->
+        </div>
+
+        <!--<li>
+            {{ mesa }}
+            <a href="/productos/compra_mesa/" class="btn btn-warning">Comprar</a>
+
+        </li>-->
+        <br>
+    {% endfor %}
+        </div>
+    </div>
+    </ul>
+    
+<!------------------------------------------------------->
+   
+    <h4 style="text-align: center;">Sillas</h4>
+    <ul>
+    <div class="container">
+        <div style="float:right;">
+        
+           <!-- <p style="color:green; ">Texto de prueba</p>-->
+            {% if request.user.is_authenticated %} 
+            
+            {% include "widget_carro.html" %} 
+            
+            {% else %}
+                <div class="alert alert-danger text-center">login para ver carro</div> 
+            {% endif %}
+
+        </div>
+    
+    <div class="row">
+
+    {% for silla in sillas %}
+        <div class="col-md-3">
+
+            <div class="card" style="width: 100%; margin: 5px 5px;">
+
+                <img src="" class="card-img-top">
+
+                <div class="card-body" style="text-align: center;">
+                    <h6 class="card-title">{{silla.nombre}}</h6>
+                    <p class="card-text"> $ {{silla.precio}}</p>
+                    
+
+                    
+                </div> <!-- card body cierre-->
+                <div class="card-footer text-center">
+
+                        <a href="/productos/compra_silla/" class="btn btn-success">Comprar</a>   
+    
+                </div>
+
+            </div> <!-- card que se cierra-->
+        </div>
+
+     
+    {% endfor %}
+    </div> <!-- class row-->
+    </div> <!-- class container-->
+    </ul>
+
+  <!------------------------------------------>
+  
+    <h4 style="text-align: center;">Sofa</h4>
+    <ul>
+    <div class="container">
+        <div style="float:right;">
+        
+           <!-- <p style="color:green; ">Texto de prueba</p>-->
+            {% if request.user.is_authenticated %} 
+            
+            {% include "widget_carro.html" %} 
+            
+            {% else %}
+                <div class="alert alert-danger text-center">login para ver carro</div> 
+            {% endif %}
+
+        </div>
+    
+    <div class="row">
+
+    {% for sof in sofa %}
+        <div class="col-md-3">
+
+            <div class="card" style="width: 100%; margin: 5px 5px;">
+
+                <img src="" class="card-img-top">
+
+                <div class="card-body" style="text-align: center;">
+                    <h6 class="card-title">{{sof.nombre}}</h6>
+                    <p class="card-text"> $ {{sof.precio}}</p>
+                    
+
+                    
+                </div> <!-- card body cierre-->
+                <div class="card-footer text-center">
+
+                        <a href="/productos/compra_sofa/" class="btn btn-success">Comprar</a>   
+    
+                </div>
+
+            </div> <!-- card que se cierra-->
+        </div>
+
+     
+    {% endfor %}
+    </div> <!-- class row-->
+    </div> <!-- class container-->
+    </ul>
+
+   {% endblock %} 

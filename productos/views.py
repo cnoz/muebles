@@ -20,7 +20,7 @@ def inicio(request):
         avatar = None
   
     #return render(request,'crud_sofa/read_sofa.html',{'sofa': sofas,'avatar': avatar })
-    return render(request, 'index.html',{'avatar':avatar})
+    return render(request, 'index.html',{'avatar':avatar})  #cambie index.html por home2.html
 
 ##################### mesas  ###################################
 @login_required
@@ -736,7 +736,18 @@ def compras (request):
   
     return render(request,'compras.html',{'mesas': mesas,'sillas':sillas,'sofa':sofa,'avatar': avatar})
     
+def compras2 (request):
+    mesas= Mesa.objects.all()
+    sillas= Silla.objects.all()
+    sofa= Sofa.objects.all()
 
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+  
+    return render(request,'compras2.html',{'mesas': mesas,'sillas':sillas,'sofa':sofa,'avatar': avatar})
 #def carrito(request):
 #    if request.GET['nombre']:
 #        nombre= request.GET['nombre']
