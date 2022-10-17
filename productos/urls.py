@@ -40,15 +40,16 @@ urlpatterns = [
 
         path('login/', login_request),
         path('registro/', registro),
-        path('logout/', LogoutView.as_view(template_name = 'home.html'), name = 'logout'),
+        path('logout/', LogoutView.as_view(template_name = 'home2.html'), name = 'logout'), #cambie home.html x home2.html
         path('perfil/editarperfil/', editarperfil),
         path('perfil/', perfilview),
         path('perfil/changepass/', changepass),
         path('perfil/changeAvatar/', AgregarAvatar),
         path('compras/', compras),
-        path('carrito/', carrito),      
+        #path('carrito/', carrito),      
         path('compra_silla/', compra_silla), 
         path('compra_mesa/', compra_mesa),     
         path('compra_sofa/', compra_sofa),    
-        path('compra_usuario/', compra_usuario),      
+        path('compra_usuario/', compra_usuario), 
+        path('acceso/',acceso)     
 ]

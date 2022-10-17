@@ -170,7 +170,7 @@ def api_usuario(request):
     return render(request, 'api_usuario.html', {'formulario': formulario})
 
 #################################### CRUD mesas  ######################################################################
-
+#####################################
 
 def create_mesas(request):
     if request.method == 'POST':
@@ -211,7 +211,7 @@ def create_mesas(request):
     #except:
     #    avatar = None
     #return render(request, 'crud_productos/create_mesas.html', {'avatar':avatar})
-@staff_member_required(redirect_field_name='next', login_url='/productos/compras/') #redirect_field_name='next',--> se puede sacar
+@staff_member_required(redirect_field_name='next', login_url='/productos/acceso/') #redirect_field_name='next',--> se puede sacar
 @login_required    
 def read_mesas(request=None):
     mesas= Mesa.objects.all()
@@ -269,7 +269,7 @@ def delete_mesas(request, mesa_id):
     return render(request, "crud_productos/read_mesas.html", {"mesas": mesas, 'avatar':avatar})
 
 #################################### CRUD sillas  ######################################################################
-
+###################################
 
 def create_sillas(request):
     if request.method == 'POST':
@@ -310,6 +310,8 @@ def create_sillas(request):
     #except:
     #    avatar = None
     #return render(request, 'crud_sillas/create_sillas.html', {"avatar":avatar})
+    
+@staff_member_required(redirect_field_name='next', login_url='/productos/acceso/') #redirect_field_name='next',--> se puede sacar
 
 @login_required    
 def read_sillas(request=None):
@@ -367,7 +369,7 @@ def delete_sillas(request, silla_id):
 
 
 #################################### CRUD sofa  ######################################################################
-
+#####################################
 
 def create_sofa(request):
     if request.method == 'POST':
@@ -409,6 +411,9 @@ def create_sofa(request):
     #except:
     #    avatar = None
     #return render(request, 'crud_sofa/create_sofa.html', {'avatar':avatar})
+
+@staff_member_required(redirect_field_name='next', login_url='/productos/acceso/') #redirect_field_name='next',--> se puede sacar
+
 @login_required    
 def read_sofa(request=None):
     sofas= Sofa.objects.all()
@@ -566,6 +571,7 @@ def delete_usuario(request, usuario_id):
 
 
 ################################  LOGIN  ###############################################################
+ 
 
 def login_request(request):    
     if request.method == 'POST':
@@ -740,9 +746,16 @@ def compras (request):
 #        respuesta="no seleccionaste datos"
 #    return HttpResponse(respuesta)
 ##################################
-def carrito(request):
+def acceso(request):
 #   
-    return render(request, "carrito.html", {'mesas': mesas})
+    avatar = Avatar.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].image.url
+    except:
+        avatar = None
+  
+    #return render(request,'acceso.html',{'mesas': mesas,'sillas':sillas,'sofa':sofa,'avatar': avatar})
+    return render(request, "acceso.html", {'avatar': avatar} )
 
 
 

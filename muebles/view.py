@@ -5,7 +5,7 @@ from django.template import loader
 
 
 def home(request):
-    planilla = loader.get_template('home.html')
+    planilla = loader.get_template('home2.html') #cambie home.html x home2.html
     documento =planilla.render()
     return HttpResponse(documento)
 
