@@ -770,7 +770,7 @@ def acceso(request):
 
 
 
-
+@login_required
 def compra_silla(request):
     avatar = Avatar.objects.filter(user = request.user.id)
     try:
@@ -778,7 +778,7 @@ def compra_silla(request):
     except:
         avatar = None
     return render(request, "compra_exitosa.html",{'avatar': avatar})
-
+@login_required
 def compra_sofa(request):
     avatar = Avatar.objects.filter(user = request.user.id)
     try:
@@ -786,7 +786,7 @@ def compra_sofa(request):
     except:
         avatar = None
     return render(request, "compra_exitosa.html",{'avatar': avatar})
-
+@login_required
 def compra_mesa(request):
     avatar = Avatar.objects.filter(user = request.user.id)
     try:
