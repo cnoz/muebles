@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 from django.contrib.admin.views.decorators import staff_member_required
+from tienda.models import *
 # Create your views here.
 
 login_required
@@ -740,6 +741,7 @@ def compras2 (request):
     mesas= Mesa.objects.all()
     sillas= Silla.objects.all()
     sofa= Sofa.objects.all()
+    productos=Producto.objects.all()
 
     avatar = Avatar.objects.filter(user = request.user.id)
     try:
@@ -747,7 +749,7 @@ def compras2 (request):
     except:
         avatar = None
   
-    return render(request,'compras2.html',{'mesas': mesas,'sillas':sillas,'sofa':sofa,'avatar': avatar})
+    return render(request,'compras2.html',{'mesas': mesas, 'sillas':sillas, 'sofa':sofa, 'productos':productos , 'avatar': avatar})
 #def carrito(request):
 #    if request.GET['nombre']:
 #        nombre= request.GET['nombre']
@@ -804,3 +806,59 @@ def compra_usuario(request):
     except:
         avatar = None
     return render(request, "compra_exitosa.html",{'avatar': avatar})
+
+####################################################################X
+####################################################################X
+####################################################################X
+
+
+
+from .carro import Carro
+
+from productos.models import Mesa
+
+
+# Create your views here.
+
+def agregar_producto(request, mesa_id):
+
+    carro=Carro(request)
+
+    mesa=Mesa.objects.get(id=mesa_id)
+
+    carro.agregar(mesa=mesa)
+
+    return redirect("widget_carro")
+
+
+def eliminar_producto(request, mesa_id):
+
+    carro=Carro(request)
+
+    mesa=Mesa.objects.get(id=mesa_id)
+
+    carro.eliminar(mesa=mesa)
+
+    return redirect("Tienda")
+
+
+def restar_producto(request, mesa_id):
+
+    carro=Carro(request)
+
+    mesa=Mesa.objects.get(id=mesa_id)
+
+    carro.restar_producto(mesa=mesa)
+
+    return redirect("Tienda")
+
+
+def limpiar_carro(request, mesa_id):
+
+    carro=Carro(request)
+
+    carro.limpiar_carro()
+
+    return redirect("Tienda")
+
+

@@ -17,7 +17,21 @@
     <tbody>
         {% if request.session.carro.items %} 
             {% for key, value in request.session.carro.items %} 
-           
+            <tr class="text-center">
+
+                <td>{{value.nombre}}</td>
+                <td>{{value.cantidad}}</td>
+                <td>
+
+                    <a href="{% url 'carro:agregar' value.producto_id %}" class="btn btn-sm btn-success">+</a>
+                    <a href="{% url 'carro:restar' value.producto_id %}" class="btn btn-sm btn-success">-</a>
+                    <br/>
+
+                    $ {{value.precio}} 
+
+                </td>
+
+              </tr>  
 
             {% endfor %} 
         {% else %} 
@@ -41,8 +55,8 @@
     
     <tr>
         <td colspan="3">
-            <p style="color:green; ">Texto de prueba</p>
-            total: Texto de prueba
+            <p style="color:green; ">Total : {{importe_total_carro}}</p>
+            
         </td>
  
     </tr>

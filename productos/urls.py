@@ -2,7 +2,7 @@
 from django.urls import path
 from productos.views import *
 from django.contrib.auth.views import LogoutView
-
+from .import views #???
 urlpatterns = [
         path('', inicio),
         path('mesas/', mesas),
@@ -51,5 +51,12 @@ urlpatterns = [
         path('compra_mesa/', compra_mesa),     
         path('compra_sofa/', compra_sofa),    
         path('compra_usuario/', compra_usuario), 
-        path('acceso/',acceso)     
+        path('acceso/',acceso),
+        path('agregar/', agregar_producto),
+
+
+        path("agregar/<int:producto_id>/", views.agregar_producto, name="agregar"),
+        path("eliminar/<int:producto_id>/", views.eliminar_producto, name="eliminar"),
+        path("restar/<int:producto_id>/", views.restar_producto, name="restar"),
+        path("limpiar/", views.limpiar_carro, name="limpiar"),     
 ]
