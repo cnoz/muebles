@@ -12,9 +12,9 @@
 <h4 style="text-align: center;">Mesas</h4>
     <ul>
     <div class="container">
-        <div style="float:right;">
+      <!--  <div style="float:right;">
         
-           <!-- <p style="color:green; ">Texto de prueba</p>-->
+         
             {% if request.user.is_authenticated %} 
             
             {% include "widget_carro.html" %} 
@@ -23,7 +23,7 @@
             <div class="alert alert-danger text-center">login para ver carro</div> 
             {% endif %}
 
-        </div>
+        </div>-->
     
         <div class="row">
 
@@ -66,9 +66,9 @@
     <h4 style="text-align: center;">Sillas</h4>
     <ul>
     <div class="container">
-        <div style="float:right;">
+        <!--- <div style="float:right;">
         
-           <!-- <p style="color:green; ">Texto de prueba</p>-->
+           
             {% if request.user.is_authenticated %} 
             
             {% include "widget_carro.html" %} 
@@ -77,7 +77,7 @@
                 <div class="alert alert-danger text-center">login para ver carro</div> 
             {% endif %}
 
-        </div>
+        </div> --->
     
     <div class="row">
 
@@ -115,9 +115,9 @@
     <h4 style="text-align: center;">Sofa</h4>
     <ul>
     <div class="container">
-        <div style="float:right;">
+        <!--<div style="float:right;">
         
-           <!-- <p style="color:green; ">Texto de prueba</p>-->
+         
             {% if request.user.is_authenticated %} 
             
             {% include "widget_carro.html" %} 
@@ -126,7 +126,7 @@
                 <div class="alert alert-danger text-center">login para ver carro</div> 
             {% endif %}
 
-        </div>
+        </div>--->
     
     <div class="row">
 
@@ -158,5 +158,9 @@
     </div> <!-- class row-->
     </div> <!-- class container-->
     </ul>
+<!---------------------------------------------------------------------------------------------------->
+
+
+
 
    {% endblock %} 
